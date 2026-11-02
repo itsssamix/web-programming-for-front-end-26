@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Nostalgia 90 & 2000 | Pokedex Retrô</title>
+  <meta name="description" content="Aplicação Front-End consumindo a PokéAPI com foco nos clássicos dos anos 90 e 2000.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;600;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header / Barra de Navegação -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <span class="pokeball-icon"></span>
+        <h1>POKÉ<span>CLÁSSICOS</span></h1>
+      </div>
+      <nav class="nav-menu">
+        <a href="#inicio">Início</a>
+        <a href="#historia">Era de Ouro</a>
+        <a href="#catalogo">Pokedex</a>
+        <a href="#sobre">Sobre o Projeto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção Hero / Destaque Retrô Anos 90/2000 -->
+  <section id="inicio" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="badge-retro">Anos 90 & 2000</span>
+      <h2 class="hero-title">O Fenômeno que Marcou Gerações</h2>
+      <p class="hero-desc">
+        Reviva a magia do anime que explodiu nos anos 90 e embalou as manhãs dos anos 2000 na TV.
+        Explore os monstrinhos originais de Kanto e Johto em tempo real diretamente da PokéAPI!
+      </p>
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn btn-primary">Explorar Cards</a>
+        <a href="#historia" class="btn btn-secondary">Linha do Tempo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Contextual: Curiosidades e História -->
+  <section id="historia" class="info-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">A Febre Pokémon nos Anos 90 e 2000</h2>
+        <p class="section-subtitle">Um dos maiores marcos da cultura pop e da televisão aberta</p>
+      </div>
+
+      <div class="info-cards-grid">
+        <div class="info-card">
+          <div class="info-badge">1997 - 1999</div>
+          <h3>A Chegada no Brasil</h3>
+          <p>O anime estreou no Brasil em maio de 1999 no programa <em>Eliana & Alegria</em> (Record) e mais tarde na Cartoon Network, tornando-se instantaneamente um estrondoso fenômeno de audiência.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-badge">Anos 2000</div>
+          <h3>Geração Johto & Cinema</h3>
+          <p>O sucesso levou milhões aos cinemas com <em>Pokémon: O Filme (Mewtwo contra-ataca)</em> e o clássico <em>Pokémon 2000</em>, introduzindo novas criaturas, fitas VHS e álbuns de figurinhas colecionáveis.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-badge">Tecnologia & Legado</div>
+          <h3>Conexão em Tempo Real</h3>
+          <p>Utilizando a arquitetura moderna da Web com <strong>JavaScript assíncrono (Fetch API)</strong>, conectamos nossa interface nostálgica aos servidores globais da <strong>PokéAPI</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Principal: Catálogo Dinâmico de Personagens (Cards criados via JS) -->
+  <section id="catalogo" class="catalog-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Galeria de Personagens da API</h2>
+        <p class="section-subtitle">Cards gerados 100% dinamicamente via JavaScript com consumo da PokéAPI</p>
+      </div>
+
+      <!-- Barra de Ferramentas / Filtros -->
+      <div class="toolbar">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Buscar por nome ou número (ex: Pikachu, 25)..." autocomplete="off">
+        </div>
+
+        <div class="filter-box">
+          <label for="typeFilter" class="filter-label">Tipo:</label>
+          <select id="typeFilter" class="select-filter">
+            <option value="all">Todos os Tipos</option>
+            <option value="fire">Fogo (Fire)</option>
+            <option value="water">Água (Water)</option>
+            <option value="grass">Planta (Grass)</option>
+            <option value="electric">Elétrico (Electric)</option>
+            <option value="normal">Normal</option>
+            <option value="poison">Veneno (Poison)</option>
+            <option value="psychic">Psíquico (Psychic)</option>
+            <option value="bug">Inseto (Bug)</option>
+            <option value="ground">Terra (Ground)</option>
+            <option value="fighting">Lutador (Fighting)</option>
+            <option value="rock">Pedra (Rock)</option>
+            <option value="ghost">Fantasma (Ghost)</option>
+            <option value="dragon">Dragão (Dragon)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Status / Feedback Visual -->
+      <div id="statusContainer" class="status-container" style="display: none;">
+        <!-- Inserido dinamicamente se houver loading, erro ou lista vazia -->
+      </div>
+
+      <!-- Container onde o JavaScript injeta os CARDS -->
+      <div id="cardsGrid" class="cards-grid">
+        <!-- Cards serão criados dinamicamente com createElement / appendChild -->
+      </div>
+
+      <!-- Paginação / Carregar Mais -->
+      <div class="load-more-container">
+        <button id="loadMoreBtn" class="btn btn-primary btn-load-more">
+          <span class="btn-text">Carregar Mais Personagens</span>
+          <span class="btn-spinner" style="display: none;"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal com Detalhes Completos do Personagem -->
+  <div id="detailModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close" aria-label="Fechar detalhes">&times;</button>
+      <div id="modalBody" class="modal-body">
+        <!-- Conteúdo do modal montado via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção Sobre a Entrega Técnica -->
+  <section id="sobre" class="about-section">
+    <div class="container">
+      <div class="about-box">
+        <h3>Especificações da Aplicação Front-End</h3>
+        <ul class="specs-list">
+          <li><strong>Linguagens utilizadas:</strong> HTML5 semântico, CSS3 moderno (Flexbox, Grid e Variáveis CSS) e Vanilla JavaScript (ES6+).</li>
+          <li><strong>Consumo de API:</strong> Requisições via <code>fetch()</code> assíncrono com tratamento de erros (try/catch).</li>
+          <li><strong>Manipulação do DOM:</strong> Criação dos Cards via <code>document.createElement()</code> e <code>appendChild()</code>.</li>
+          <li><strong>Responsividade:</strong> Interface adaptável para celulares, tablets e computadores.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 - Projeto Front-End | Desenhos Clássicos dos Anos 90 e 2000</p>
+      <p>Dados fornecidos por <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">PokéAPI</a></p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
